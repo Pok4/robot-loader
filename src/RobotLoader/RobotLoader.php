@@ -34,6 +34,7 @@ class RobotLoader
 
 	/** @var string[] */
 	public array $acceptFiles = ['*.php'];
+	public bool $topLevelOnly = true;
 	private bool $autoRebuild = true;
 	private bool $reportParseErrors = true;
 
@@ -229,7 +230,7 @@ class RobotLoader
 				$classes[$file] = []; // prevents the error when adding the same file twice
 
 				foreach ($foundClasses as $class) {
-					if (isset($this->classes[$class])) {
+					if (isset($this->classes[$class]) && $this->classes[$class][0] !== $file) {
 						throw new Nette\InvalidStateException(sprintf(
 							'Ambiguous class %s resolution; defined in %s and in %s.',
 							$class,
@@ -361,7 +362,7 @@ class RobotLoader
 					$namespace = $name ? $name . '\\' : '';
 					$minLevel = $token->text === '{' ? 1 : 0;
 
-				} elseif ($name && $level === $minLevel) {
+				} elseif ($name && ($level === $minLevel || !$this->topLevelOnly)) {
 					$classes[] = $namespace . $name;
 				}
 

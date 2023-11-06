@@ -6,4 +6,8 @@ if (false) {
 	class ConditionalClass
 	{
 	}
+} else {
+	class ConditionalClass
+	{
+	}
 }
