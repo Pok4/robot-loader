@@ -44,6 +44,9 @@ class RobotLoader
 	/** @var string[] */
 	private array $excludeDirs = [];
 
+	/*pok4*/
+	private array $excludeFiles = [];
+
 	/** @var array<string, array{string, int}>  class => [file, time] */
 	private array $classes = [];
 	private bool $cacheLoaded = false;
@@ -149,6 +152,13 @@ class RobotLoader
 	public function excludeDirectory(string ...$paths): static
 	{
 		$this->excludeDirs = array_merge($this->excludeDirs, $paths);
+		return $this;
+	}
+
+	/*pok4*/
+	public function excludeFiles($files)
+	{
+		$this->excludeFiles = $files;
 		return $this;
 	}
 
@@ -265,11 +275,12 @@ class RobotLoader
 			}
 		}
 
+		/*pok4 addon here*/
 		return Nette\Utils\Finder::findFiles($this->acceptFiles)
 			->filter($filter = fn(SplFileInfo $file) => $file->getRealPath() === false || !isset($disallow[$file->getRealPath()]))
 			->descentFilter($filter)
 			->from($dir)
-			->exclude($this->ignoreDirs);
+			->exclude($this->ignoreDirs)->exclude($this->excludeFiles);
 	}
 
 
