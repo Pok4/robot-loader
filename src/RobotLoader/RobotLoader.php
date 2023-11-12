@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Nette\Loaders;
+namespace RobotLoader;
 
 use Nette;
 use Nette\Utils\FileSystem;
