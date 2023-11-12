@@ -24,10 +24,9 @@
 		"tracy/tracy": "^2.9",
 		"phpstan/phpstan": "^1.0"
 	},
-	"autoload": {
-		"classmap": ["src/"],					
+	"autoload": {				
 		"psr-4": {
-			"Nette\\": "src"
+			"Nette\\Loaders\\RobotLoader\\": "src"
 		}
 	},
 	"minimum-stability": "dev",
