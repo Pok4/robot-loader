@@ -26,7 +26,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Nette\\Loaders\\RobotLoader": "src"
+			"Nette\\Loaders\\RobotLoader\\": "src"
 		}
 	},
 	"minimum-stability": "dev",
